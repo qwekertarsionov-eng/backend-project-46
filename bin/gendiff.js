@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import genDiff from '../src/index.js'; // Импортируем главную функцию
 
 const program = new Command();
 
@@ -9,9 +10,12 @@ program
   .description('Compares two configuration files and shows a difference.')
   .version('0.0.1', '-V, --version', 'output the version number')
   .helpOption('-h, --help', 'display help for command')
-  // Добавляем опцию формата
   .option('-f, --format [type]', 'output format')
-  // Добавляем два обязательных аргумента (пути к файлам)
-  .arguments('<filepath1> <filepath2>');
+  .arguments('<filepath1> <filepath2>')
+  // Добавляем action, который принимает аргументы командной строки
+  .action((filepath1, filepath2) => {
+    const result = genDiff(filepath1, filepath2);
+    console.log(result);
+  });
 
 program.parse(process.argv);
