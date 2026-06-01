@@ -1,0 +1,40 @@
+name: CI
+
+# Запуск проверок при каждом push или Pull Request в ветку main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x] # Используем актуальную LTS версию Node.js
+
+    steps:
+      # Скачиваем код репозитория на виртуальную машину GitHub
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Устанавливаем и настраиваем Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm' # Кэшируем зависимости для ускорения последующих сборок
+
+      # Устанавливаем зависимости проекта через чистую установку
+      - name: Install dependencies
+        run: make install
+
+      # Запускаем проверку стиля кода (линтер)
+      - name: Run linter
+        run: make lint
+
+      # Запускаем ваши тесты Jest
+      - name: Run tests
+        run: make test
