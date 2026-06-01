@@ -33,7 +33,7 @@ const formatDiff = (diff) => {
       case 'changed':
         return [
           `  - ${key}: ${oldValue}`,
-          `  + ${key}: ${newValue}`
+          `  + ${key}: ${newValue}`,
         ];
       case 'unchanged':
         return `    ${key}: ${value}`;

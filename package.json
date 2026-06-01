@@ -12,8 +12,9 @@
   },
   "description": "[![Actions Status](https://github.com)](https://github.com)",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+  "test-coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com"
@@ -29,6 +30,7 @@
     "@eslint/js": "^10.0.1",
     "@eslint/migrate-config": "^2.1.0",
     "@stylistic/eslint-plugin": "^5.10.0",
+    "jest": "^30.4.2",
     "prettier": "^3.8.3"
   }
 }
