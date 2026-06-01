@@ -1,4 +1,4 @@
-[![CI](https://github.com)](https://github.com)
+[![CI](https://github.com/qwekertarsionov-eng/backend-project-46/actions/workflows/main.yml/badge.svg)](https://github.com/qwekertarsionov-eng/backend-project-46/actions)
 
 ### Hexlet tests and linter status:
 
