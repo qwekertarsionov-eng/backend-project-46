@@ -1,19 +1,19 @@
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs';
+import * as yaml from 'js-yaml'; // Импортируем всё как объект yaml
 
 export const parseFile = (filepath) => {
-  // Получаем абсолютный путь с учетом текущей рабочей директории
   const absolutePath = path.resolve(process.cwd(), filepath);
-
-  // Читаем файл синхронно
   const content = fs.readFileSync(absolutePath, 'utf-8');
+  const ext = path.extname(filepath).toLowerCase();
 
-  // Получаем расширение файла (например, '.json')
-  const ext = path.extname(absolutePath);
-
-  // Парсим в зависимости от расширения
   if (ext === '.json') {
     return JSON.parse(content);
+  }
+  
+  if (ext === '.yaml' || ext === '.yml') {
+    // Метод load теперь вызывается точно так же, но без ошибок импорта
+    return yaml.load(content);
   }
 
   throw new Error(`Unknown format: ${ext}`);
