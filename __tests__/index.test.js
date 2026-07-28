@@ -19,3 +19,17 @@ test('genDiff YAML', () => {
   const file2 = getFixturePath('file2.yaml'); // Изменили .yml на .yaml (или наоборот, если у вас .yml)
   expect(genDiff(file1, file2)).toEqual(expected);
 });
+
+const expectedNested = fs.readFileSync(getFixturePath('expected_nested.txt'), 'utf-8');
+
+test('genDiff nested JSON', () => {
+  const file1 = getFixturePath('nested1.json');
+  const file2 = getFixturePath('nested2.json');
+  expect(genDiff(file1, file2)).toEqual(expectedNested);
+});
+
+test('genDiff nested YAML', () => {
+  const file1 = getFixturePath('nested1.yaml');
+  const file2 = getFixturePath('nested2.yaml');
+  expect(genDiff(file1, file2)).toEqual(expectedNested);
+});
