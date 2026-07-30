@@ -10,7 +10,7 @@ export const parseFile = (filepath) => {
   if (ext === '.json') {
     return JSON.parse(content);
   }
-  
+
   if (ext === '.yaml' || ext === '.yml') {
     // Метод load теперь вызывается точно так же, но без ошибок импорта
     return yaml.load(content);

@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const isObject = (value) => _.isPlainObject(value);
+const isObject = value => _.isPlainObject(value);
 
 // Функция для формирования отступов
 const indent = (depth, spaceCount = 4) => ' '.repeat(depth * spaceCount - 2);

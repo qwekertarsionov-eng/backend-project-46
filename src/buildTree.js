@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const isObject = (value) => _.isPlainObject(value);
+const isObject = value => _.isPlainObject(value);
 
 const buildTree = (data1, data2) => {
   // Получаем все уникальные ключи из обоих объектов и сортируем их
@@ -19,7 +19,7 @@ const buildTree = (data1, data2) => {
     if (isObject(data1[key]) && isObject(data2[key])) {
       return { key, type: 'nested', children: buildTree(data1[key], data2[key]) };
     }
-// 4. Значения одинаковые -> без изменений
+    // 4. Значения одинаковые -> без изменений
     if (data1[key] === data2[key]) {
       return { key, type: 'unchanged', value: data1[key] };
     }

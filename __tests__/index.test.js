@@ -1,9 +1,10 @@
+import { test, expect } from '@jest/globals';
 import fs from 'fs';
 import path from 'path';
 import genDiff from '../src/index.js';
 
 // Функция для получения абсолютного пути к фикстурам
-const getFixturePath = (filename) => path.resolve(process.cwd(), '__fixtures__', filename);
+const getFixturePath = filename => path.resolve(process.cwd(), '__fixtures__', filename);
 
 // Читаем ожидаемый результат один раз для всех тестов
 const expected = fs.readFileSync(getFixturePath('expected_flat.txt'), 'utf-8');
@@ -32,4 +33,21 @@ test('genDiff nested YAML', () => {
   const file1 = getFixturePath('nested1.yaml');
   const file2 = getFixturePath('nested2.yaml');
   expect(genDiff(file1, file2)).toEqual(expectedNested);
+});
+
+const expectedPlain = fs.readFileSync(getFixturePath('expected_plain.txt'), 'utf-8');
+
+test('genDiff plain format', () => {
+  const file1 = getFixturePath('nested1.json');
+  const file2 = getFixturePath('nested2.json');
+  expect(genDiff(file1, file2, 'plain')).toEqual(expectedPlain);
+});
+
+test('genDiff json format', () => {
+  const file1 = getFixturePath('nested1.json');
+  const file2 = getFixturePath('nested2.json');
+
+  // Проверяем, что вывод является валидной JSON-строкой
+  const result = genDiff(file1, file2, 'json');
+  expect(() => JSON.parse(result)).not.toThrow();
 });
