@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [26.x] # Используем актуальную LTS версию Node.js
+        node-version: [24.x] # Используем актуальную LTS версию Node.js
 
     steps:
       # Скачиваем код репозитория на виртуальную машину GitHub
