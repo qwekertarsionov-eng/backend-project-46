@@ -29,7 +29,7 @@ jobs:
 
       # Устанавливаем зависимости проекта через чистую установку
       - name: Install dependencies
-        run: make install
+        run: npm ci
 
       # Запускаем проверку стиля кода (линтер)
       - name: Run linter
